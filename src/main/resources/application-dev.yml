@@ -1,0 +1,52 @@
+# Server
+server:
+  port: 18099
+
+spring:
+  # DataSource
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://127.0.0.1:5432/auth
+    username: postgres
+    password: abc123
+    driverClassName: org.postgresql.Driver
+    hikari:
+      poolName: hikariCP
+      minimumIdle: 1
+      maximumPoolSize: 20
+      connectionTimeout: 30000
+      idleTimeout: 300000
+      maxLifetime: 1800000
+      connectionTestQuery: select 1
+      autoCommit: false
+  # Redis
+  redisson:
+    threads: 2
+    nettyThreads: 5
+    single:
+      address: redis://127.0.0.1:6379
+      database: 0
+      password: abc123
+      idleConnectionTimeout: 30000
+      connectTimeout: 10000
+      timeout: 3000
+      connectionMinimumIdleSize: 1
+      connectionPoolSize: 8
+      clientName: RedissonClient
+      retryInterval: 1500
+      subscriptionsPerConnection: 5
+      subscriptionConnectionMinimumIdleSize: 1
+      subscriptionConnectionPoolSize: 5
+      dnsMonitoringInterval: -1
+      sslEnableEndpointIdentification: false
+
+# Logger
+logging:
+  level:
+    root: INFO
+    fml.plus.auth: DEBUG
+
+
+sign:
+  enable: true
+  key: key
