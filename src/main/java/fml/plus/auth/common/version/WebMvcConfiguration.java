@@ -1,5 +1,6 @@
 package fml.plus.auth.common.version;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
@@ -12,9 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.lang.reflect.Method;
 
 @Configuration
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WebMvcConfiguration implements WebMvcRegistrations {
 
-    @Autowired
     private ApiVersionProperties properties;
 
     @Data

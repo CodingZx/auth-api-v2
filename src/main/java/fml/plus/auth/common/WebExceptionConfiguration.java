@@ -7,6 +7,7 @@ import fml.plus.auth.common.exception.LockAcquiredFailedException;
 import fml.plus.auth.common.exception.LoginException;
 import fml.plus.auth.common.exception.UnknownException;
 import fml.plus.auth.common.model.R;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WebExceptionConfiguration implements InitializingBean {
-    @Autowired
     private ExceptionLogService logService;
     private static final List<Class<? extends Exception>> IGNORE_EXCEPTION = Lists.newLinkedList();
 
@@ -54,7 +55,7 @@ public class WebExceptionConfiguration implements InitializingBean {
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(LoginException.class)
-    public R<?> handleLoginException(LoginException e) {
+    public R<?> handleLoginException(LoginException ignore) {
         return R.login();
     }
 
@@ -77,7 +78,7 @@ public class WebExceptionConfiguration implements InitializingBean {
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(LockAcquiredFailedException.class)
-    public R<?> handleLockException(LockAcquiredFailedException e) {
+    public R<?> handleLockException(LockAcquiredFailedException ignore) {
         return R.other("请重试");
     }
 

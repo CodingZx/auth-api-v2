@@ -10,6 +10,7 @@ import fml.plus.auth.mapper.LogMapper;
 import fml.plus.auth.service.AccountService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -31,11 +32,10 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Aspect
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Configuration
 public class LogProcessor {
-    @Autowired
     private AccountService accountService;
-    @Autowired
     private LogMapper logMapper;
 
     @Pointcut("@annotation(fml.plus.auth.common.aop.log.Log)")

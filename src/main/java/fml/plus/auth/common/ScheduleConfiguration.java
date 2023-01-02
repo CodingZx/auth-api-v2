@@ -1,5 +1,6 @@
 package fml.plus.auth.common;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ import java.util.concurrent.Executors;
 @Slf4j
 @Configuration
 @Import(ScheduleConfiguration.ScheduleProperty.class)
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ScheduleConfiguration implements SchedulingConfigurer {
-    @Autowired
     private ScheduleProperty scheduleProperty;
 
     @Override

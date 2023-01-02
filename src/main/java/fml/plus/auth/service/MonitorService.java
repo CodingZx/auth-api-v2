@@ -81,10 +81,10 @@ public class MonitorService {
 
     }
 
-    private long youngGC;
-    private long youngGCTime;
-    private long oldGC;
-    private long oldGCTime;
+    private static long youngGC;
+    private static long youngGCTime;
+    private static long oldGC;
+    private static long oldGCTime;
 
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void monitor() {
@@ -102,16 +102,16 @@ public class MonitorService {
                 var gcTime = gc.getCollectionTime();
                 switch (gc.getName()) {
                     case "G1 Young Generation" -> {
-                        monitor.setYoungGC((int)(gcCount - this.youngGC));
-                        monitor.setYoungGCTime(gcTime - this.youngGCTime);
-                        this.youngGC = gcCount;
-                        this.youngGCTime = gcTime;
+                        monitor.setYoungGC((int)(gcCount - youngGC));
+                        monitor.setYoungGCTime(gcTime - youngGCTime);
+                        youngGC = gcCount;
+                        youngGCTime = gcTime;
                     }
                     case "G1 Old Generation" -> {
-                        monitor.setOldGC((int)(gcCount - this.oldGC));
-                        monitor.setOldGCTime(gcTime - this.oldGCTime);
-                        this.oldGC = gcCount;
-                        this.oldGCTime = gcTime;
+                        monitor.setOldGC((int)(gcCount - oldGC));
+                        monitor.setOldGCTime(gcTime - oldGCTime);
+                        oldGC = gcCount;
+                        oldGCTime = gcTime;
                     }
                 }
             }

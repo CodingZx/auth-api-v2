@@ -19,6 +19,7 @@ import fml.plus.auth.service.LoginService;
 import fml.plus.auth.service.MonitorService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +44,11 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TokenInterceptor implements HandlerInterceptor {
-    @Autowired
     private SignConfiguration.SignProperty signProperty;
-    @Autowired
     private LoginService loginService;
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private MonitorService monitorService;
 
     @Override
