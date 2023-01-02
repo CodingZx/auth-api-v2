@@ -9,6 +9,7 @@ import fml.plus.auth.common.model.R;
 import fml.plus.auth.dto.resp.ExceptionLogResp;
 import fml.plus.auth.service.ExceptionLogService;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Slf4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/exception/log")
 public class ExceptionLogController {
-    @Autowired
     private ExceptionLogService exceptionLogService;
 
     @Authority("exception:log:list")

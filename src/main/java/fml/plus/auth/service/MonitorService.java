@@ -11,6 +11,7 @@ import fml.plus.auth.common.util.GsonUtils;
 import fml.plus.auth.dto.resp.MonitorResp;
 import fml.plus.auth.entity.MonitorEntity;
 import fml.plus.auth.mapper.MonitorMapper;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -31,17 +32,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class MonitorService {
-    @Autowired
     private LockService lockService;
-    @Autowired
     private ExceptionLogService exceptionLogService;
-    @Autowired
     private MonitorMapper monitorMapper;
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private IAfterCommitExecutor afterCommitExecutor;
 
     public List<MonitorResp> monitor(String server, int minutes) {

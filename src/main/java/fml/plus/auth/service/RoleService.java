@@ -22,6 +22,7 @@ import fml.plus.auth.mapper.AdminMapper;
 import fml.plus.auth.mapper.MenuMapper;
 import fml.plus.auth.mapper.RoleMapper;
 import fml.plus.auth.mapper.RoleMenuMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -33,19 +34,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class RoleService {
-    @Autowired
     private IAfterCommitExecutor afterCommit;
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private RoleMapper roleMapper;
-    @Autowired
     private RoleMenuMapper roleMenuMapper;
-    @Autowired
     private MenuMapper menuMapper;
-    @Autowired
     private AdminMapper adminMapper;
 
     public List<Selector> all() {

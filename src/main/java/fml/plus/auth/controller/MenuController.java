@@ -10,6 +10,7 @@ import fml.plus.auth.common.model.R;
 import fml.plus.auth.dto.req.MenuReq;
 import fml.plus.auth.dto.resp.SimpleMenuTreeResp;
 import fml.plus.auth.entity.MenuEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,10 @@ import java.util.stream.Collectors;
 
 import static fml.plus.auth.common.constants.GlobalConstants.MENU_ID;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
-    @Autowired
     private MenuService menuService;
 
     @Authority("auth:menu")

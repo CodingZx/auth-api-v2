@@ -12,6 +12,7 @@ import fml.plus.auth.common.constants.GlobalConstants;
 import fml.plus.auth.common.model.Page;
 import fml.plus.auth.common.model.R;
 import fml.plus.auth.dto.req.AdminReq;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.UUID;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-    @Autowired
     private AccountService accountService;
 
     @Authority("auth:account")

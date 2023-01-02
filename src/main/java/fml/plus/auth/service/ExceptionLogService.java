@@ -14,6 +14,7 @@ import fml.plus.auth.entity.ExceptionLogBackupEntity;
 import fml.plus.auth.entity.ExceptionLogEntity;
 import fml.plus.auth.mapper.ExceptionLogBackupMapper;
 import fml.plus.auth.mapper.ExceptionLogMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,17 +30,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class ExceptionLogService {
-    @Autowired
     private ExceptionLogMapper exceptionLogMapper;
-    @Autowired
     private ExceptionLogBackupMapper exceptionLogBackupMapper;
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private LockService lockService;
-    @Autowired
     private IAfterCommitExecutor afterCommitExecutor;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

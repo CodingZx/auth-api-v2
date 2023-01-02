@@ -9,6 +9,7 @@ import fml.plus.auth.common.redisson.lock.LockService;
 import fml.plus.auth.common.util.GsonUtils;
 import fml.plus.auth.entity.ConfigEntity;
 import fml.plus.auth.mapper.ConfigMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -24,14 +25,11 @@ import static fml.plus.auth.common.constants.RedisConstants.NULL_VAL;
 
 @Slf4j
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class ConfigService {
-
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private LockService lockService;
-    @Autowired
     private ConfigMapper configMapper;
 
     /**

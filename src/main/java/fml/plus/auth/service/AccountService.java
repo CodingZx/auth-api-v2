@@ -17,6 +17,7 @@ import fml.plus.auth.dto.resp.AdminResp;
 import fml.plus.auth.entity.AccountEntity;
 import fml.plus.auth.mapper.AdminMapper;
 import fml.plus.auth.mapper.RoleMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -30,25 +31,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class AccountService {
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private IAfterCommitExecutor afterCommitExecutor;
-    @Autowired
     private RoleMapper roleMapper;
-    @Autowired
     private AdminMapper adminMapper;
 
     public Pager<AdminResp> list(Page page, String userName, String realName){
         var superAdmin = UserThreadInfo.get().isSuperAdmin();
 
-        var query = adminMapper.wrapper().page(page.toRow());
+        var query = adminMapper.wrapper().page(page.toRow()).orderByDesc(AccountEntity::getCreateTime);
         if(!Strings.isNullOrEmpty(userName)) query.like(AccountEntity::getUserName, SQLUtils.fuzzyAll(userName));
         if(!Strings.isNullOrEmpty(realName)) query.like(AccountEntity::getRealName, SQLUtils.fuzzyAll(realName));
         if(!superAdmin) query.ne(AccountEntity::getId, GlobalConstants.DEFAULT_ID);
-        query.orderByDesc(AccountEntity::getCreateTime);
 
         var list = query.list();
         var count = query.count();

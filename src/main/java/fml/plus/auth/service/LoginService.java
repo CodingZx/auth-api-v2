@@ -26,6 +26,7 @@ import fml.plus.auth.mapper.AdminMapper;
 import fml.plus.auth.mapper.IPLimitMapper;
 import fml.plus.auth.mapper.MenuMapper;
 import fml.plus.auth.mapper.RoleMenuMapper;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -42,19 +43,14 @@ import java.util.stream.Collectors;
 import static fml.plus.auth.common.constants.RedisConstants.NULL_VAL;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class LoginService {
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private AdminMapper adminMapper;
-    @Autowired
     private RoleMenuMapper roleMenuMapper;
-    @Autowired
     private MenuMapper menuMapper;
-    @Autowired
     private LockService lockService;
-    @Autowired
     private IPLimitMapper ipLimitMapper;
 
     public String getKey() {

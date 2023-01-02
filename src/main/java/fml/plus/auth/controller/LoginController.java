@@ -12,15 +12,16 @@ import fml.plus.auth.dto.resp.CurrentMenuResp;
 import fml.plus.auth.dto.resp.LoginResp;
 import fml.plus.auth.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 public class LoginController {
-    @Autowired
     private LoginService loginService;
 
     @VisitorAccess

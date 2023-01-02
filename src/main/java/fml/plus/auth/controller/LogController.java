@@ -10,6 +10,7 @@ import fml.plus.auth.common.aop.log.BusinessType;
 import fml.plus.auth.common.model.Page;
 import fml.plus.auth.common.model.R;
 import fml.plus.auth.common.util.time.LocalDateTimeUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/log")
 public class LogController {
-    @Autowired
     private LogService logService;
 
     @Authority("auth:log")

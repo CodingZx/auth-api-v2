@@ -9,6 +9,7 @@ import fml.plus.auth.dto.resp.LogDetailResp;
 import fml.plus.auth.dto.resp.LogResp;
 import fml.plus.auth.entity.LogEntity;
 import fml.plus.auth.mapper.LogMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +20,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class LogService {
-    @Autowired
     private LogMapper logMapper;
 
     public Pager<LogResp> list(Page page, String operName, LocalDateTime start, LocalDateTime end) {

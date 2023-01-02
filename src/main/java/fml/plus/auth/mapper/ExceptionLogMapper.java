@@ -2,12 +2,14 @@ package fml.plus.auth.mapper;
 
 import fml.plus.auth.common.mybatis.mapper.BaseMapper;
 import fml.plus.auth.entity.ExceptionLogEntity;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Mapper
 public interface ExceptionLogMapper extends BaseMapper<UUID, ExceptionLogEntity> {
 
     @Update("""

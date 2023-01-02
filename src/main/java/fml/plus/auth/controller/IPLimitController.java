@@ -8,16 +8,17 @@ import fml.plus.auth.common.model.Pager;
 import fml.plus.auth.common.model.R;
 import fml.plus.auth.dto.resp.IPLimitResp;
 import fml.plus.auth.service.IPLimitService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.UUID;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/ip/limit")
 public class IPLimitController {
-    @Autowired
     private IPLimitService ipLimitService;
 
     @Authority("ip:limit:list")

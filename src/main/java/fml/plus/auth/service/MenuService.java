@@ -14,6 +14,7 @@ import fml.plus.auth.entity.MenuEntity;
 import fml.plus.auth.entity.RoleMenuEntity;
 import fml.plus.auth.mapper.MenuMapper;
 import fml.plus.auth.mapper.RoleMenuMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional(rollbackFor = Exception.class)
 public class MenuService {
-    @Autowired
     private IAfterCommitExecutor afterCommitExecutor;
-    @Autowired
     private StringRedisTemplate redis;
-    @Autowired
     private MenuMapper menuMapper;
-    @Autowired
     private RoleMenuMapper roleMenuMapper;
 
     public List<MenuTreeResp> list(){
