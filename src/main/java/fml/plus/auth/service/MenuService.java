@@ -96,6 +96,7 @@ public class MenuService {
     }
 
     public void remove(List<UUID> ids){
+        var keys = new HashSet<String>();
         Queue<UUID> queue = Lists.newLinkedList(ids);
         while(!queue.isEmpty()) {
             UUID menuId = queue.remove();
@@ -103,10 +104,17 @@ public class MenuService {
             queue.addAll(list.stream().map(MenuEntity::getId).filter(Objects::nonNull).toList());
             menuMapper.deleteById(menuId);
 
+            var joinRoles = roleMenuMapper.wrapper().eq(RoleMenuEntity::getMenuId, menuId).list();
+            for(var roleMenu : joinRoles) {
+                keys.add(RedisConstants.MenuKeys.getCurrentKey(roleMenu.getRoleId()));
+                keys.add(RedisConstants.MenuKeys.getCurrentPermissionKey(roleMenu.getRoleId()));
+            }
+
             // 删除关联
             roleMenuMapper.wrapper().eq(RoleMenuEntity::getMenuId, menuId).delete();
         }
 
-        afterCommitExecutor.run(() -> redis.delete(RedisConstants.MenuKeys.getAllMenus()));
+        keys.add(RedisConstants.MenuKeys.getAllMenus());
+        afterCommitExecutor.run(() -> redis.delete(keys));
     }
 }
